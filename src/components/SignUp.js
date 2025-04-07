@@ -14,7 +14,7 @@ function SignUp() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:5000/api/signup', { email, password, name })
+      .post('https://fundinar-server.onrender.com/api/signup', { email, password, name })
       .then((res) => {
         setMessage(res.data.message);
         setError('');

@@ -20,7 +20,7 @@ function Admin() {
       return;
     }
     axios
-      .get('http://localhost:5000/api/user', {
+      .get('https://fundinar-server.onrender.com/api/user', {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -37,7 +37,7 @@ function Admin() {
 
   const fetchUsers = () => {
     axios
-      .get('http://localhost:5000/api/users', {
+      .get('https://fundinar-server.onrender.com/api/users', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       .then((res) => setUsers(res.data.filter((u) => u.role !== 'fundManager')))
@@ -46,7 +46,7 @@ function Admin() {
 
   const fetchPendingRequests = () => {
     axios
-      .get('http://localhost:5000/api/pending-requests', {
+      .get('https://fundinar-server.onrender.com/api/pending-requests', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       .then((res) => setPendingRequests(res.data))
@@ -55,7 +55,7 @@ function Admin() {
 
   const fetchTransactions = (userId) => {
     axios
-      .get(`http://localhost:5000/api/transactions/${userId}`, {
+      .get(`https://fundinar-server.onrender.com/api/transactions/${userId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       .then((res) => setTransactions((prev) => ({ ...prev, [userId]: res.data })))
@@ -64,7 +64,7 @@ function Admin() {
 
   const handleApprove = (id) => {
     axios
-      .post(`http://localhost:5000/api/users/${id}/approve`, {}, {
+      .post(`https://fundinar-server.onrender.com/api/users/${id}/approve`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       .then(() => fetchUsers())
@@ -73,7 +73,7 @@ function Admin() {
 
   const handleDeny = (id) => {
     axios
-      .post(`http://localhost:5000/api/users/${id}/deny`, {}, {
+      .post(`https://fundinar-server.onrender.com/api/users/${id}/deny`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       .then(() => fetchUsers())
@@ -82,7 +82,7 @@ function Admin() {
 
   const handleDelete = (id) => {
     axios
-      .post(`http://localhost:5000/api/users/${id}/delete`, {}, {
+      .post(`https://fundinar-server.onrender.com/api/users/${id}/delete`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       .then(() => {
@@ -95,7 +95,7 @@ function Admin() {
   const handleUpdatePortfolio = (id) => {
     const portfolio = portfolioInputs[id] || 0;
     axios
-      .post(`http://localhost:5000/api/users/${id}/portfolio`, { portfolio }, {
+      .post(`https://fundinar-server.onrender.com/api/users/${id}/portfolio`, { portfolio }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       .then(() => fetchUsers())
@@ -105,7 +105,7 @@ function Admin() {
   const handleUpdateTransaction = (txId, userId) => {
     const { amount, fee } = transactionInputs[txId] || { amount: 0, fee: 0 };
     axios
-      .put(`http://localhost:5000/api/transactions/${txId}`, { amount, fee, status: 'processed' }, {
+      .put(`https://fundinar-server.onrender.com/api/transactions/${txId}`, { amount, fee, status: 'processed' }, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       .then(() => {
@@ -117,7 +117,7 @@ function Admin() {
 
   const handleDeleteTransaction = (txId, userId) => {
     axios
-      .delete(`http://localhost:5000/api/transactions/${txId}`, {
+      .delete(`https://fundinar-server.onrender.com/api/transactions/${txId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       .then(() => {
@@ -139,7 +139,7 @@ function Admin() {
   const handleAddTransaction = (userId, type) => {
     axios
       .post(
-        'http://localhost:5000/api/transactions',
+        'https://fundinar-server.onrender.com/api/transactions',
         {
           userId,
           type,
@@ -167,7 +167,7 @@ function Admin() {
     <div className="min-h-screen w-full max-w-5xl mx-auto text-white flex flex-col justify-between px-4 sm:px-6 lg:px-8">
       <div>
         <h2 className="text-3xl sm:text-4xl font-bold pulse-gradient-text text-center mt-10 mb-8">Fund Manager Dashboard</h2>
-        
+
         <div className="card p-6 w-full max-w-2xl mx-auto mb-8">
           <h3 className="text-xl sm:text-2xl font-semibold text-center mb-4">Pending Requests</h3>
           <div className="space-y-4">
@@ -233,7 +233,7 @@ function Admin() {
               <div key={user.id} className="flex flex-col sm:flex-row justify-between items-center p-4 bg-gray-800 rounded-lg gap-4">
                 <div className="flex items-center gap-4 text-sm sm:text-base">
                   <img
-                    src={user.profilePic ? `http://localhost:5000${user.profilePic}` : '/logo.png'}
+                    src={user.profilePic ? `https://fundinar-server.onrender.com${user.profilePic}` : '/logo.png'}
                     alt={user.name}
                     className="rounded-full h-10 w-10 object-cover"
                   />
@@ -253,7 +253,7 @@ function Admin() {
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                   <div className="flex items-center gap-4 text-sm sm:text-base">
                     <img
-                      src={user.profilePic ? `http://localhost:5000${user.profilePic}` : '/logo.png'}
+                      src={user.profilePic ? `https://fundinar-server.onrender.com${user.profilePic}` : '/logo.png'}
                       alt={user.name}
                       className="rounded-full h-10 w-10 object-cover"
                     />

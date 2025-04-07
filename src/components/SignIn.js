@@ -13,7 +13,7 @@ function SignIn() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:5000/api/signin', { email, password })
+      .post('https://fundinar-server.onrender.com/api/signin', { email, password })
       .then((res) => {
         localStorage.setItem('token', res.data.token);
         navigate(res.data.role === 'fundManager' ? '/admin' : '/user');

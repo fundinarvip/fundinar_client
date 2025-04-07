@@ -41,7 +41,7 @@ function User() {
 
   const fetchTransactions = useCallback((userId) => {
     axios
-      .get(`http://localhost:5000/api/transactions/${userId}`, {
+      .get(`https://fundinar-server.onrender.com/api/transactions/${userId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       .then((res) => {
@@ -60,7 +60,7 @@ function User() {
       return;
     }
     axios
-      .get('http://localhost:5000/api/user', {
+      .get('https://fundinar-server.onrender.com/api/user', {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -166,7 +166,7 @@ function User() {
     const details = withdrawCurrency === 'CRYPTO' ? `${withdrawDetails} (Network: ${withdrawNetwork})` : withdrawDetails;
     axios
       .post(
-        'http://localhost:5000/api/transactions',
+        'https://fundinar-server.onrender.com/api/transactions',
         {
           userId: user.id,
           type: 'Withdrawal',
@@ -197,7 +197,7 @@ function User() {
     const details = fundCurrency === 'CRYPTO' ? `${t('depositDetails')} ${fundCurrency} (Network: ${depositNetwork})` : `${t('depositDetails')} ${fundCurrency}`;
     axios
       .post(
-        'http://localhost:5000/api/transactions',
+        'https://fundinar-server.onrender.com/api/transactions',
         {
           userId: user.id,
           type: 'Deposit',
@@ -227,7 +227,7 @@ function User() {
     const formData = new FormData();
     formData.append('profilePic', profilePicFile);
     axios
-      .post('http://localhost:5000/api/users/profile-pic', formData, {
+      .post('https://fundinar-server.onrender.com/api/users/profile-pic', formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'multipart/form-data',
@@ -283,7 +283,7 @@ function User() {
         </select>
         <div className="flex flex-col items-center space-y-4 card p-6 w-full max-w-md mx-auto">
           <img
-            src={user.profilePic ? `http://localhost:5000${user.profilePic}` : '/logo.png'}
+            src={user.profilePic ? `https://fundinar-server.onrender.com${user.profilePic}` : '/logo.png'}
             alt="Profile"
             className="rounded-full h-20 w-20 object-cover cursor-pointer border-2 border-teal-500"
             onClick={toggleUpload}
